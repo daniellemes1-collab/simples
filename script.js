@@ -1,15 +1,23 @@
-document.getElementById("form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Impede o envio padrão do formulário
+// script.js
+
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("contactForm");
+  const statusDiv = document.getElementById("status");
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault(); // evitar envio real
 
     const nome = document.getElementById("nome").value;
     const email = document.getElementById("email").value;
     const mensagem = document.getElementById("mensagem").value;
 
-    if (nome && email && mensagem) {
-        alert("Mensagem enviada com sucesso! Em breve entraremos em contato.");
-        // Aqui você poderia enviar os dados do formulário para um servidor, por exemplo
-        document.getElementById("form").reset(); // Limpa os campos do formulário
-    } else {
-        alert("Por favor, preencha todos os campos.");
-    }
+    // Aqui você poderia fazer um envio via AJAX para servidor,
+    // Por enquanto, só exibir uma mensagem de "sucesso"
+    statusDiv.innerText = "Enviando sua mensagem...";
+
+    setTimeout(() => {
+      statusDiv.innerText = `Obrigado, ${nome}! Sua mensagem foi enviada com sucesso.`;
+      form.reset();
+    }, 1000);
+  });
 });
